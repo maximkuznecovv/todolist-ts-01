@@ -30,8 +30,8 @@ export type ActionType =
     | ChangeTodoListTitleActionType
     | ChangeTodoListFilterActionType
 
-export const todoListID_1 = v1();
-export const todoListID_2 = v1();
+// export const todoListID_1 = v1();
+// export const todoListID_2 = v1();
 const initialState: TodoListType[] = []
 
 export const todoListsReducer = (state: TodoListType[] = initialState, action: ActionType): TodoListType[] => {// TodoListType[] или Array<TodoListType>
