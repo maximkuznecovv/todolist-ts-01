@@ -104,7 +104,14 @@ export const UpdateTodoListTask = () => {
         const todolistId = '6a85142d-d303-4272-8f59-e1cb59e1d14d'
         const taskId = 'a9b0510e-c4f8-4c2a-9cf9-c996adbcce20'
         const title = 'Updated Task 2'
-        todolistAPI.updateTask(todolistId, taskId, title)
+        todolistAPI.updateTask(todolistId, taskId, {
+            title: title,
+            description: 'string',
+            status: 1,
+            priority: 1,
+            startDate: '',
+            deadline: '',
+        })
             .then((res) => {
                 setState(res.data)
             })

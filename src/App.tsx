@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import "./App.css";
 import {TodoList} from "./TodoList";
 import {AddItemForm} from "./AddItemForm";
@@ -10,6 +10,7 @@ import {
     addTodoListAC,
     changeTodoListFilterAC,
     changeTodoListTitleAC,
+    fetchTodoLists,
     FilterValuesType,
     removeTodoListAC,
     TodoListDomainType
@@ -28,6 +29,9 @@ export function App() {
 
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(fetchTodoLists())
+    }, [])
 
     const removeTask = useCallback((taskID: string, todoListID: string) => {
         dispatch(removeTaskAC(taskID, todoListID))
