@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
-import {TodoList} from './TodoList';
+import '../app/App.css';
+import {TodoList} from '../features/TodoListsList/TodoList/TodoList';
 import {v1} from 'uuid';
-import {AddItemForm} from './AddItemForm';
+import {AddItemForm} from '../components/AddItemForm/AddItemForm';
 import {
     AppBar,
     Button,
-    Container, createStyles,
+    Container,
+    createStyles,
     Grid,
     IconButton,
     makeStyles,
@@ -14,13 +15,13 @@ import {
     Theme,
     Toolbar,
     Typography
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
-import {FilterValuesType, TodoListDomainType} from './state/todolists-reducer';
-import {TaskStatuses, TaskType, TodoTaskPriorities} from './api/todolist-api';
+import {FilterValuesType, TodoListDomainType} from '../features/TodoListsList/TodoList/todolists-reducer';
+import {TaskStatuses, TaskType, TodoTaskPriorities} from '../api/todolist-api';
 
 
-export type TasksStateType = {
+type TasksStateType = {
     [key: string]: TaskType[]
 }
 
@@ -144,7 +145,7 @@ function AppOld() {
         localStorage.setItem('tasksLists', JSON.stringify(tasks))
     }, [tasks])
 
-    function removeTask(taskID: string, todoListID: string) {
+    function removeTask(todoListID: string, taskID: string) {
         // const todoListTasks = tasks[todoListID]
         // const filteredTasks = todoListTasks.filter(t => t.id !== taskID)
         // tasks[todoListID] = filteredTasks
@@ -158,7 +159,7 @@ function AppOld() {
         })
     }
 
-    function addTask(title: string, todoListID: string) {
+    function addTask(todoListID: string, title: string) {
         const newTask: TaskType = {
             id: v1(),
             title: title,
@@ -179,7 +180,7 @@ function AppOld() {
         })
     }
 
-    function changeTaskStatus(taskID: string, status: TaskStatuses, todoListID: string) {
+    function changeTaskStatus(todoListID: string, taskID: string, status: TaskStatuses) {
         /*const todoListTasks = tasks[todoListID]
         const task = todoListTasks.find(t => t.id === taskID)
         if (task) {
@@ -189,10 +190,11 @@ function AppOld() {
         const updatedTasks = tasks[todoListID].map(t => t.id === taskID ? {...t, isDone: status} : t)
         setTasks({
             ...tasks,
-            [todoListID]: updatedTasks})
+            [todoListID]: updatedTasks
+        })
     }
 
-    function changeTaskTitle(taskID: string, newTitle: string, todoListID: string) {
+    function changeTaskTitle(todoListID: string, taskID: string, newTitle: string) {
         // const todoListTasks = tasks[todoListID]
         // const task = todoListTasks.find(t => t.id === taskID)
         // if (task) {
@@ -206,7 +208,7 @@ function AppOld() {
         })
     }
 
-    function changeTodoListFilter(newFilterValue: FilterValuesType, todoListID: string) {
+    function changeTodoListFilter(todoListID: string, newFilterValue: FilterValuesType) {
         // const todoList = todoLists.find(tl => tl.id === todoListID)
         // if (todoList) {
         //     todoList.filter = newFilterValue
@@ -215,7 +217,7 @@ function AppOld() {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: newFilterValue} : tl))
     }
 
-    function changeTodoListTitle(newTitle: string, todoListID: string) {
+    function changeTodoListTitle(todoListID: string, newTitle: string) {
         // const todoList = todoLists.find(tl => tl.id === todoListID)
         // if (todoList) {
         //     todoList.title = newTitle
