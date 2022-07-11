@@ -18,6 +18,7 @@ import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar";
 import {Login} from "../features/Login/Login";
+import {Routes, Route, Navigate} from "react-router-dom";
 
 export function App() {
 
@@ -37,10 +38,16 @@ export function App() {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
-            {status === 'loading' && <LinearProgress color="secondary"/>}
+            {status === "loading" && <LinearProgress color="secondary"/>}
             <Container fixed>
-                <TodoListsList/>
-                <Login/>
+                <Routes>
+                    <Route path="/" element={<TodoListsList/>}/>
+                    <Route path="login" element={<Login/>}/>
+
+                    {/*<Route path="*" element={<h1 style={{textAlign: "center"}}>404: PAGE NOT FOUND</h1>}/>*/}
+                    <Route path="/404" element={<h1 style={{textAlign: "center"}}>404: PAGE NOT FOUND</h1>}/>
+                    <Route path="*" element={<Navigate to='/404'/>}/>
+                </Routes>
             </Container>
         </div>
     );
