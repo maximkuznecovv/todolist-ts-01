@@ -1,20 +1,20 @@
-import axios from 'axios'
+import axios, {AxiosResponse} from "axios"
 
 const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+    baseURL: "https://social-network.samuraijs.com/api/1.1/",
     withCredentials: true,
     headers: {
-        'API-KEY': '75c2dc54-1515-4be3-abc1-f18008041a1d'
+        "API-KEY": "75c2dc54-1515-4be3-abc1-f18008041a1d"
     }
 })
 
 // API
 export const todolistAPI = {
     getTodos() {
-        return instance.get<Array<TodoListType>>('todo-lists')
+        return instance.get<Array<TodoListType>>("todo-lists")
     },
     createTodo(title: string) {
-        return instance.post<ResponseType<{ item: TodoListType }>>('todo-lists', {title})
+        return instance.post<ResponseType<{ item: TodoListType }>>("todo-lists", {title})
     },
     deleteTodo(todolistId: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}`)
@@ -40,7 +40,21 @@ export const todolistAPI = {
     },
 }
 
+export const authAPI = {
+    login(data: LoginParamsType) {
+        return instance.post<LoginParamsType, AxiosResponse<ResponseType<{userId: number}>>>('/auth/login', data)
+    }
+}
+
+
 // Types
+type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+    captcha?: string
+}
+
 export enum TaskStatuses {
     New,
     InProgress,
