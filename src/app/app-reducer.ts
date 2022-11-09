@@ -31,10 +31,7 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 // Action Creators
 export const setAppStatus = (status: RequestStatusType) => ({type: "APP/SET-STATUS", status} as const)
 export const setAppError = (error: string | null) => ({type: "APP/SET-ERROR", error} as const)
-export const setAppIsInitialized = (isInitialized: boolean) => ({
-    type: "APP/SET-IS-INITIALIZED",
-    isInitialized
-} as const)
+export const setAppIsInitialized = (isInitialized: boolean) => ({type: "APP/SET-IS-INITIALIZED", isInitialized} as const)
 
 // Types
 export type SetAppStatusType = ReturnType<typeof setAppStatus>
@@ -55,7 +52,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
         .catch((error) => {
             handleServerNetworkError(error, dispatch)
         })
-        .finally(()=>{
+        .finally(() => {
             dispatch(setAppIsInitialized(true))
         })
 }

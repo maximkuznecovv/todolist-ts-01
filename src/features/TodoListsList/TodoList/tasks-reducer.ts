@@ -1,10 +1,10 @@
 import {
     addTodolistAC,
-    AddTodoListActionType, changeTodolistEntityStatusAC, removeTodoListAC,
+    AddTodoListActionType, changeTodolistEntityStatusAC, ClearTodoListsDataType, removeTodoListAC,
     RemoveTodoListActionType,
     setTodoListAC,
     SetTodoListActionType
-} from './todolists-reducer';
+} from "./todolists-reducer";
 import {TaskStatuses, TaskType, todolistAPI, TodoTaskPriorities, UpdateTaskModelType} from '../../../api/todolist-api';
 import {Dispatch} from 'redux';
 import {AppRootStateType, AppThunk} from '../../../app/store';
@@ -69,6 +69,8 @@ export const tasksReducer = (state = initialState, action: TasksActionType): Tas
             delete copyState[action.id]
             return copyState
         }
+        case "CLEAR-DATA":
+            return {}
         default:
             return state
     }
@@ -168,6 +170,7 @@ export type TasksActionType =
     | SetTodoListActionType
     | SetAppStatusType
     | SetAppErrorType
+    | ClearTodoListsDataType
 
 export type UpdateDomainTaskModelType = {
     title?: string
